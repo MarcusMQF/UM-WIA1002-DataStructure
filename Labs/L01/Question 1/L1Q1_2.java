@@ -1,10 +1,10 @@
 import java.util.Scanner;
 import java.io.*;
 
-public class L1Q2 {
+public class L1Q1_2 {
     public static void main(String[] args) {
-        String originalFile = "L01/L1Q1.txt";
-        String file = "L01/L1Q2.txt";
+        String originalFile = "Labs/L01/Question 1/L1Q1_1.txt";
+        String file = "Labs/L01/Question 1/L1Q1_2.txt";
         
         // First, read the original file
         try {

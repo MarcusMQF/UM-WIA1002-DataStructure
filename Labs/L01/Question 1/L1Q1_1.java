@@ -1,10 +1,10 @@
 import java.util.Scanner;
 import java.io.*;
 
-public class L1Q1 {
+public class L1Q1_1 {
     public static void main(String[] args) {
 
-        String file = "L01/L1Q1.txt";
+        String file = "Labs/L01/Question 1/L1Q1_1.txt";
 
         try(Scanner fileScanner = new Scanner(new File(file))){
             while(fileScanner.hasNextLine()){

@@ -4,16 +4,16 @@ import java.util.Scanner;
 public class L1Q2_2 {
     public static void main(String[] args) {
         // Process all text files with their respective delimiters
-        processFile("text1.txt", ",");
-        processFile("text2.txt", ",\\s*"); // Matches comma followed by optional whitespace
-        processFile("text3.txt", ";\\s*"); // Matches semicolon followed by optional whitespace
-        processFile("text4.txt", "\\d+");  // Matches one or more digits
+        processFile("Labs/L01/Question 2/text1.txt", ",");
+        processFile("Labs/L01/Question 2/text2.txt", ",\\s*"); // Matches comma followed by optional whitespace
+        processFile("Labs/L01/Question 2/text3.txt", ";\\s*"); // Matches semicolon followed by optional whitespace
+        processFile("Labs/L01/Question 2/text4.txt", "\\d+");  // Matches one or more digits
     }
     
     private static void processFile(String fileName, String delimiter) {
         try {
             System.out.println("\nProcessing " + fileName + ":");
-            File file = new File("L01/" + fileName);
+            File file = new File(fileName);
             Scanner scanner = new Scanner(file);
             StringBuilder content = new StringBuilder();
             

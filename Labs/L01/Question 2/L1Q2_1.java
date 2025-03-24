@@ -3,19 +3,19 @@ import java.util.Scanner;
 
 public class L1Q2_1 {
     public static void main(String[] args) {
-        processFile("text1.txt", ",");
+        processFile("Labs/L01/Question 2/text1.txt");
     }
     
-    private static void processFile(String fileName, String delimiter) {
+    private static void processFile(String fileName) {
         try {
             System.out.println("\nProcessing " + fileName + ":");
-            File file = new File("L01/" + fileName);
+            File file = new File(fileName);
             Scanner scanner = new Scanner(file);
             StringBuilder allChars = new StringBuilder();
             
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                String[] chars = line.split(delimiter);
+                String[] chars = line.split(",");
                 for (String ch : chars) {
                     allChars.append(ch.trim());
                 }
