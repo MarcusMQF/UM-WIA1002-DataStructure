@@ -1,9 +1,9 @@
 # WIA1002 Data Structure
 
-[![License](https://img.shields.io/github/license/your-username/UM-WIA1002-DataStructure?color=blue)](LICENSE)
+[![License](https://img.shields.io/github/license/MarcusMQF/UM-WIA1002-DataStructure?color=blue)](LICENSE)
 ![Java Version](https://img.shields.io/badge/Java-17%2B-orange)
-![Last Commit](https://img.shields.io/github/last-commit/your-username/UM-WIA1002-DataStructure?color=green)
-![Repo Size](https://img.shields.io/github/repo-size/your-username/UM-WIA1002-DataStructure?color=yellow)
+![Last Commit](https://img.shields.io/github/last-commit/MarcusMQF/UM-WIA1002-DataStructure?color=green)
+![Repo Size](https://img.shields.io/github/repo-size/MarcusMQF/UM-WIA1002-DataStructure?color=yellow)
 
 ## 📚 Introduction
 
