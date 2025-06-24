@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search & Sort Algorithms - Data Structure Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0a0b0d;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 280px;
+            background-color: #1a1b23;
+            border-right: 1px solid #2d3748;
+            padding: 20px 0;
+            overflow-y: auto;
+            position: fixed;
+            height: 100vh;
+        }
+
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid #2d3748;
+        }
+
+        .sidebar-header h2 {
+            color: #00d4aa;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-nav {
+            padding: 20px 0;
+        }
+
+        .nav-section {
+            margin-bottom: 25px;
+        }
+
+        .nav-section-title {
+            color: #64748b;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            padding: 0 20px 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-item {
+            display: block;
+            padding: 8px 20px;
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background-color: #2d3748;
+            color: #00d4aa;
+            border-left-color: #00d4aa;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 40px;
+            max-width: calc(100% - 280px);
+        }
+
+        .content-section {
+            display: none;
+            max-width: 900px;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        h1 {
+            color: #00d4aa;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #2d3748;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: #4fd1c7;
+            font-size: 1.8rem;
+            margin: 30px 0 15px;
+            border-left: 4px solid #00d4aa;
+            padding-left: 15px;
+        }
+
+        h3 {
+            color: #68d391;
+            font-size: 1.4rem;
+            margin: 25px 0 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #e2e8f0;
+        }
+
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #cbd5e0;
+        }
+
+        /* Code Block Styles */
+        .code-block {
+            background-color: #1e1e1e;
+            border: 1px solid #2d3748;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            color: #e2e8f0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .code-header {
+            background-color: #2d3748;
+            color: #00d4aa;
+            padding: 10px 15px;
+            font-weight: 600;
+            border-radius: 8px 8px 0 0;
+            margin: 20px 0 0 0;
+        }
+
+        .code-block.with-header {
+            border-radius: 0 0 8px 8px;
+            margin-top: 0;
+        }
+
+        /* Algorithm Complexity Table */
+        .complexity-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #1a1b23;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .complexity-table th,
+        .complexity-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #2d3748;
+        }
+
+        .complexity-table th {
+            background-color: #2d3748;
+            color: #00d4aa;
+            font-weight: 600;
+        }
+
+        .complexity-table td {
+            color: #cbd5e0;
+        }
+
+        /* Animation Links */
+        .animation-link {
+            display: inline-block;
+            background-color: #2d3748;
+            color: #00d4aa;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+        }
+
+        .animation-link:hover {
+            background-color: #4a5568;
+        }
+
+        /* Key Points Box */
+        .key-points {
+            background-color: #1a365d;
+            border-left: 4px solid #3182ce;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .key-points h4 {
+            color: #63b3ed;
+            margin-bottom: 10px;
+        }
+
+        /* Warning Box */
+        .warning {
+            background-color: #742a2a;
+            border-left: 4px solid #f56565;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning h4 {
+            color: #feb2b2;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                max-width: 100%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>WIA 1002</h2>
+                <p>Data Structure</p>
+            </div>
+            
+            <div class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Search Algorithms</div>
+                    <a href="#overview" class="nav-item active">Overview</a>
+                    <a href="#linear-search" class="nav-item">Linear Search</a>
+                    <a href="#binary-search" class="nav-item">Binary Search</a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Sort Algorithms</div>
+                    <a href="#sorting-overview" class="nav-item">Sorting Overview</a>
+                    <a href="#selection-sort" class="nav-item">Selection Sort</a>
+                    <a href="#insertion-sort" class="nav-item">Insertion Sort</a>
+                    <a href="#bubble-sort" class="nav-item">Bubble Sort</a>
+                    <a href="#merge-sort" class="nav-item">Merge Sort</a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Advanced Topics</div>
+                    <a href="#generic-sorting" class="nav-item">Generic Sorting</a>
+                    <a href="#complexity-analysis" class="nav-item">Complexity Analysis</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Overview Section -->
+            <section id="overview" class="content-section active">
+                <h1>Search & Sort Algorithms</h1>
+                <p>This documentation covers fundamental search and sort algorithms commonly used in computer programming and data structures.</p>
+                
+                <h2>What is Searching?</h2>
+                <p>Searching is the process of looking for a specific element in a group of items (such as in an array). It's one of the most fundamental operations in computer science.</p>
+                
+                <div class="key-points">
+                    <h4>Key Search Approaches:</h4>
+                    <ul>
+                        <li><strong>Linear Search:</strong> Sequential comparison with each element</li>
+                        <li><strong>Binary Search:</strong> Divide and conquer approach (requires sorted data)</li>
+                    </ul>
+                </div>
+
+                <h2>What is Sorting?</h2>
+                <p>Sorting is the process of arranging elements in a particular order (ascending or descending). Like searching, it's also a fundamental task in computer programming.</p>
+            </section>
+
+            <!-- Linear Search Section -->
+            <section id="linear-search" class="content-section">
+                <h1>Linear Search</h1>
+                
+                <h2>Algorithm Description</h2>
+                <p>Linear search compares the key element sequentially with each element in the group (such as array list). It continues until the key matches an element or the list is exhausted.</p>
+                
+                <div class="key-points">
+                    <h4>How Linear Search Works:</h4>
+                    <ul>
+                        <li>Start from the first element</li>
+                        <li>Compare each element with the target key</li>
+                        <li>If found, return the index</li>
+                        <li>If not found after checking all elements, return -1</li>
+                    </ul>
+                </div>
+
+                <h2>Implementation</h2>
+                <div class="code-header">Java Implementation</div>
+                <div class="code-block with-header">
+                    <pre>
+public static int linearSearch(int[] list, int key) {
+    for (int i = 0; i < list.length; i++) {
+        if (key == list[i]) {
+            return i;  // Return index if found
+        }
+    }
+    return -1;  // Return -1 if not found
+}
+                    </pre>
+                </div>
+
+                <h2>Example Usage</h2>
+                <div class="code-header">Example Code</div>
+                <div class="code-block with-header">
+                    <pre>
+int[] list = {1, 4, 4, 2, 5, -3, 6, 2};
+int i = linearSearch(list, 4);   // returns 1
+int j = linearSearch(list, -4);  // returns -1
+int k = linearSearch(list, -3);  // returns 5
+                    </pre>
+                </div>
+
+                <h2>Time Complexity</h2>
+                <table class="complexity-table">
+                    <thead>
+                        <tr>
+                            <th>Case</th>
+                            <th>Time Complexity</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Best Case</td>
+                            <td>O(1)</td>
+                            <td>Element found at first position</td>
+                        </tr>
+                        <tr>
+                            <td>Average Case</td>
+                            <td>O(n)</td>
+                            <td>Element found at middle position</td>
+                        </tr>
+                        <tr>
+                            <td>Worst Case</td>
+                            <td>O(n)</td>
+                            <td>Element at last position or not found</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <a href="https://yongdanielliang.github.io/animation/web/LinearSearchNew.html" class="animation-link" target="_blank">View Linear Search Animation</a>
+            </section>
+
+            <!-- Binary Search Section -->
+            <section id="binary-search" class="content-section">
+                <h1>Binary Search</h1>
+                
+                <div class="warning">
+                    <h4>Prerequisites:</h4>
+                    <p>The elements in the group must already be ordered (sorted) before applying binary search.</p>
+                </div>
+
+                <h2>Algorithm Description</h2>
+                <p>Binary search first compares the key with the element in the middle of the group, then decides which half to search next based on the comparison result.</p>
+                
+                <div class="key-points">
+                    <h4>Binary Search Logic:</h4>
+                    <ul>
+                        <li><strong>If key < middle element:</strong> Search in the first half</li>
+                        <li><strong>If key = middle element:</strong> Search ends with a match</li>
+                        <li><strong>If key > middle element:</strong> Search in the second half</li>
+                    </ul>
+                </div>
+
+                <h2>Implementation</h2>
+                <div class="code-header">Java Implementation</div>
+                <div class="code-block with-header">
+                    <pre>
+public static int binarySearch(int[] list, int key) {
+    int low = 0;
+    int high = list.length - 1;
+    
+    while (high >= low) {
+        int mid = (low + high) / 2;
+        
+        if (key < list[mid]) {
+            high = mid - 1;
+        } else if (key == list[mid]) {
+            return mid;
+        } else {
+            low = mid + 1;
+        }
+    }
+    
+    return -low - 1;  // Return insertion point - 1
+}
+                    </pre>
+                </div>
+
+                <h2>Example Trace</h2>
+                <p>Searching for key = 54 in array: [2, 4, 7, 10, 11, 45, 50, 59, 60, 66, 69, 70, 79]</p>
+                
+                <div class="code-block">
+                    <pre>
+Step 1: low=0, high=12, mid=6, list[6]=50
+        key=54 > 50, so search right half: low=7
+
+Step 2: low=7, high=12, mid=9, list[9]=66  
+        key=54 < 66, so search left half: high=8
+
+Step 3: low=7, high=8, mid=7, list[7]=59
+        key=54 < 59, so search left half: high=6
+
+Step 4: low=7, high=6, condition fails
+        Return -7-1 = -8 (insertion point)
+                    </pre>
+                </div>
+
+                <h2>Time Complexity</h2>
+                <table class="complexity-table">
+                    <thead>
+                        <tr>
+                            <th>Case</th>
+                            <th>Time Complexity</th>
+                            <th>Space Complexity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Best Case</td>
+                            <td>O(1)</td>
+                            <td>O(1)</td>
+                        </tr>
+                        <tr>
+                            <td>Average Case</td>
+                            <td>O(log n)</td>
+                            <td>O(1)</td>
+                        </tr>
+                        <tr>
+                            <td>Worst Case</td>
+                            <td>O(log n)</td>
+                            <td>O(1)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <a href="https://yongdanielliang.github.io/animation/web/BinarySearchNew.html" class="animation-link" target="_blank">View Binary Search Animation</a>
+            </section>
+
+            <!-- Sorting Overview Section -->
+            <section id="sorting-overview" class="content-section">
+                <h1>Sorting Algorithms Overview</h1>
+                
+                <p>Sorting is a common task in computer programming. We'll cover four main sorting algorithms:</p>
+                
+                <div class="key-points">
+                    <h4>Sorting Algorithms Covered:</h4>
+                    <ol>
+                        <li><strong>Selection Sort:</strong> Find minimum and place it in correct position</li>
+                        <li><strong>Insertion Sort:</strong> Insert each element into its correct position in sorted portion</li>
+                        <li><strong>Bubble Sort:</strong> Compare adjacent elements and swap if needed</li>
+                        <li><strong>Merge Sort:</strong> Divide and conquer approach with merging</li>
+                    </ol>
+                </div>
+
+                <h2>Comparison of Sorting Algorithms</h2>
+                <table class="complexity-table">
+                    <thead>
+                        <tr>
+                            <th>Algorithm</th>
+                            <th>Best Case</th>
+                            <th>Average Case</th>
+                            <th>Worst Case</th>
+                            <th>Space Complexity</th>
+                            <th>Stable</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Selection Sort</td>
+                            <td>O(n²)</td>
+                            <td>O(n²)</td>
+                            <td>O(n²)</td>
+                            <td>O(1)</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>Insertion Sort</td>
+                            <td>O(n)</td>
+                            <td>O(n²)</td>
+                            <td>O(n²)</td>
+                            <td>O(1)</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Bubble Sort</td>
+                            <td>O(n)</td>
+                            <td>O(n²)</td>
+                            <td>O(n²)</td>
+                            <td>O(1)</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>Merge Sort</td>
+                            <td>O(n log n)</td>
+                            <td>O(n log n)</td>
+                            <td>O(n log n)</td>
+                            <td>O(n)</td>
+                            <td>Yes</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Selection Sort Section -->
+            <section id="selection-sort" class="content-section">
+                <h1>Selection Sort</h1>
+                
+                <h2>Algorithm Description</h2>
+                <p>Selection sort finds the smallest number in the list and places it first. It then finds the smallest number remaining and places it second, and so on until the list contains only a single number.</p>
+                
+                <div class="key-points">
+                    <h4>Selection Sort Steps:</h4>
+                    <ol>
+                        <li>Find the minimum element in the array</li>
+                        <li>Swap it with the first element</li>
+                        <li>Find the minimum in the remaining array</li>
+                        <li>Swap it with the second element</li>
+                        <li>Repeat until array is sorted</li>
+                    </ol>
+                </div>
+
+                <h2>Implementation</h2>
+                <div class="code-header">Java Implementation</div>
+                <div class="code-block with-header">
+                    <pre>
+public static void selectionSort(double[] list) {
+    for (int i = 0; i < list.length - 1; i++) {
+        // Find the minimum in the list[i..list.length-1]
+        double currentMin = list[i];
+        int currentMinIndex = i;
+        
+        for (int j = i + 1; j < list.length; j++) {
+            if (currentMin > list[j]) {
+                currentMin = list[j];
+                currentMinIndex = j;
+            }
+        }
+        
+        // Swap list[i] with list[currentMinIndex] if necessary
+        if (currentMinIndex != i) {
+            list[currentMinIndex] = list[i];
+            list[i] = currentMin;
+        }
+    }
+}
+                    </pre>
+                </div>
+
+                <h2>Algorithm Trace</h2>
+                <div class="code-block">
+                    <pre>
+Initial: [64, 25, 12, 22, 11]
+
+Pass 1: Find min(64,25,12,22,11) = 11, swap with first
+        [11, 25, 12, 22, 64]
+
+Pass 2: Find min(25,12,22,64) = 12, swap with second  
+        [11, 12, 25, 22, 64]
+
+Pass 3: Find min(25,22,64) = 22, swap with third
+        [11, 12, 22, 25, 64]
+
+Pass 4: Find min(25,64) = 25, no swap needed
+        [11, 12, 22, 25, 64] - SORTED
+                    </pre>
+                </div>
+
+                <a href="https://yongdanielliang.github.io/animation/web/SelectionSortNew.html" class="animation-link" target="_blank">View Selection Sort Animation</a>
+            </section>
+
+            <!-- Insertion Sort Section -->
+            <section id="insertion-sort" class="content-section">
+                <h1>Insertion Sort</h1>
+                
+                <h2>Algorithm Description</h2>
+                <p>The insertion sort algorithm sorts a list of values by repeatedly inserting an unsorted element into a sorted sublist until the whole list is sorted.</p>
+                
+                <div class="key-points">
+                    <h4>Insertion Sort Process:</h4>
+                    <ol>
+                        <li>Start with second element (first is considered sorted)</li>
+                        <li>Compare current element with elements in sorted portion</li>
+                        <li>Shift larger elements to the right</li>
+                        <li>Insert current element in correct position</li>
+                        <li>Repeat for all elements</li>
+                    </ol>
+                </div>
+
+                <h2>Implementation</h2>
+                <div class="code-header">Java Implementation</div>
+                <div class="code-block with-header">
+                    <pre>
+public static void insertionSort(double[] list) {
+    for (int i = 1; i < list.length; i++) {
+        // Insert list[i] into a sorted sublist list[0..i-1]
+        double currentElement = list[i];
+        int k;
+        
+        for (k = i - 1; k >= 0 && list[k] > currentElement; k--) {
+            list[k + 1] = list[k];  // Shift element to right
+        }
+        
+        // Insert the current element into list[k + 1]
+        list[k + 1] = currentElement;
+    }
+}
+                    </pre>
+                </div>
+
+                <h2>Step-by-Step Example</h2>
+                <p>Sorting array: [2, 9, 5, 4, 8, 1, 6]</p>
+                
+                <div class="code-block">
+                    <pre>
+Initial:  [2, 9, 5, 4, 8, 1, 6]
+          
+Step 1:   [2, 9, 5, 4, 8, 1, 6]  // 9 > 2, no change
+Step 2:   [2, 5, 9, 4, 8, 1, 6]  // Insert 5 between 2 and 9
+Step 3:   [2, 4, 5, 9, 8, 1, 6]  // Insert 4 between 2 and 5
+Step 4:   [2, 4, 5, 8, 9, 1, 6]  // Insert 8 between 5 and 9
+Step 5:   [1, 2, 4, 5, 8, 9, 6]  // Insert 1 at beginning
+Step 6:   [1, 2, 4, 5, 6, 8, 9]  // Insert 6 between 5 and 8
+                    </pre>
+                </div>
+
+                <h2>Insertion Process Detail</h2>
+                <p>Example: Inserting 4 into sorted sublist [2, 5, 9]</p>
+                
+                <div class="code-block">
+                    <pre>
+Step 1: Save 4 to currentElement
+        list: [2, 5, 9, 4, ...]
+        
+Step 2: Compare 4 with 9, shift 9 right
+        list: [2, 5, _, 9, ...]
+        
+Step 3: Compare 4 with 5, shift 5 right  
+        list: [2, _, 5, 9, ...]
+        
+Step 4: Compare 4 with 2, 4 > 2, stop
+        Insert 4 at position 1
+        list: [2, 4, 5, 9, ...]
+                    </pre>
+                </div>
+
+                <a href="https://yongdanielliang.github.io/animation/web/InsertionSortNew.html" class="animation-link" target="_blank">View Insertion Sort Animation</a>
+            </section>
+
+            <!-- Bubble Sort Section -->
+            <section id="bubble-sort" class="content-section">
+                <h1>Bubble Sort</h1>
+                
+                <h2>Algorithm Description</h2>
+                <p>The bubble sort algorithm makes several passes through the array. On each pass, successive neighboring pairs are compared. If a pair is in decreasing order, its values are swapped; otherwise, the values remain unchanged.</p>
+                
+                <div class="key-points">
+                    <h4>Bubble Sort Characteristics:</h4>
+                    <ul>
+                        <li>Smaller values gradually "bubble" to the top</li>
+                        <li>Larger values "sink" to the bottom</li>
+                        <li>After each pass, one more element is in its final position</li>
+                        <li>Can be optimized to stop early if no swaps occur</li>
+                    </ul>
+                </div>
+
+                <h2>Basic Implementation</h2>
+                <div class="code-header">Basic Bubble Sort</div>
+                <div class="code-block with-header">
+                    <pre>
+public static void bubbleSort(double[] list) {
+    boolean needNextPass = true;
+    
+    for (int k = 1; k < list.length && needNextPass; k++) {
+        needNextPass = false;  // Array may be sorted, no need for next pass
+        
+        for (int i = 0; i < list.length - k; i++) {
+            if (list[i] > list[i + 1]) {
+                // Swap list[i] with list[i + 1]
+                double temp = list[i];
+                list[i] = list[i + 1];
+                list[i + 1] = temp;
+                
+                needNextPass = true;  // Next pass still needed
+            }
+        }
+    }
+}
+                    </pre>
+                </div>
+
+                <h2>Algorithm Trace</h2>
+                <div class="code-block">
+                    <pre>
+Initial: [64, 34, 25, 12, 22, 11, 90]
+
+Pass 1: Compare adjacent elements, swap if needed
+        [34, 25, 12, 22, 11, 64, 90]  // 90 is in position
+
+Pass 2: Work on remaining elements  
+        [25, 12, 22, 11, 34, 64, 90]  // 64 is in position
+
+Pass 3: Continue the process
+        [12, 22, 11, 25, 34, 64, 90]  // 34 is in position
+
+Pass 4: [12, 11, 22, 25, 34, 64, 90]  // 25 is in position
+
+Pass 5: [11, 12, 22, 25, 34, 64, 90]  // 22 is in position
+
+Pass 6: No swaps needed - SORTED!
+                    </pre>
+                </div>
+
+                <div class="warning">
+                    <h4>Optimization Note:</h4>
+                    <p>The needNextPass boolean flag helps optimize the algorithm by stopping early if no swaps occur in a pass, indicating the array is already sorted.</p>
+                </div>
+
+                <a href="https://yongdanielliang.github.io/animation/web/BubbleSortNew.html" class="animation-link" target="_blank">View Bubble Sort Animation</a>
+            </section>
+
+            <!-- Merge Sort Section -->
+            <section id="merge-sort" class="content-section">
+                <h1>Merge Sort</h1>
+                
+                <h2>Algorithm Description</h2>
+                <p>Merge sort is a divide-and-conquer algorithm that divides the array into two halves, applies merge sort on each half recursively, and then merges the sorted halves.</p>
+                
+                <div class="key-points">
+                    <h4>Merge Sort Process:</h4>
+                    <ol>
+                        <li><strong>Divide:</strong> Split array into two halves</li>
+                        <li><strong>Conquer:</strong> Recursively sort each half</li>
+                        <li><strong>Combine:</strong> Merge the sorted halves</li>
+                    </ol>
+                </div>
+
+                <h2>Recursive Structure</h2>
+                <div class="code-block">
+                    <pre>
+mergeSort(list):
+    if list.length > 1:
+        firstHalf = mergeSort(firstHalf)
+        secondHalf = mergeSort(secondHalf)  
+        list = merge(firstHalf, secondHalf)
+    return list
+                    </pre>
+                </div>
+
+                <h2>Implementation</h2>
+                <div class="code-header">Java Implementation</div>
+                <div class="code-block with-header">
+                    <pre>
+public static void mergeSort(int[] list) {
+    if (list.length > 1) {
+        // Merge sort the first half
+        int[] firstHalf = new int[list.length / 2];
+        System.arraycopy(list, 0, firstHalf, 0, list.length / 2);
+        mergeSort(firstHalf);
+        
+        // Merge sort the second half  
+        int secondHalfLength = list.length - list.length / 2;
+        int[] secondHalf = new int[secondHalfLength];
+        System.arraycopy(list, list.length / 2, secondHalf, 0, secondHalfLength);
+       mergeSort(secondHalf);
+       
+       // Merge firstHalf with secondHalf into list
+       merge(firstHalf, secondHalf, list);
+   }
+}
+
+public static void merge(int[] list1, int[] list2, int[] temp) {
+   int current1 = 0; // Current index in list1
+   int current2 = 0; // Current index in list2  
+   int current3 = 0; // Current index in temp
+   
+   while (current1 < list1.length && current2 < list2.length) {
+       if (list1[current1] < list2[current2])
+           temp[current3++] = list1[current1++];
+       else
+           temp[current3++] = list2[current2++];
+   }
+   
+   while (current1 < list1.length)
+       temp[current3++] = list1[current1++];
+       
+   while (current2 < list2.length)
+       temp[current3++] = list2[current2++];
+}
+                   </pre>
+               </div>
+
+               <h2>Visual Example</h2>
+               <p>Sorting array: [2, 9, 5, 4, 8, 1, 6, 7]</p>
+               
+               <div class="code-block">
+                   <pre>
+                   [2, 9, 5, 4, 8, 1, 6, 7]
+                        /            \
+                [2, 9, 5, 4]      [8, 1, 6, 7]
+                  /      \           /      \
+              [2, 9]   [5, 4]   [8, 1]   [6, 7]
+               /  \     /  \     /  \     /  \
+             [2] [9]  [5] [4]  [8] [1]  [6] [7]
+
+MERGE PHASE:
+             [2] [9]  [4] [5]  [1] [8]  [6] [7]
+               \  /     \  /     \  /     \  /
+              [2, 9]   [4, 5]   [1, 8]   [6, 7]
+                  \      /           \      /
+               [2, 4, 5, 9]      [1, 6, 7, 8]
+                        \            /
+                   [1, 2, 4, 5, 6, 7, 8, 9]
+                   </pre>
+               </div>
+
+               <h2>Advantages of Merge Sort</h2>
+               <div class="key-points">
+                   <h4>Benefits:</h4>
+                   <ul>
+                       <li><strong>Stable:</strong> Preserves relative order of equal elements</li>
+                       <li><strong>Predictable:</strong> Always O(n log n) time complexity</li>
+                       <li><strong>Efficient:</strong> Good for large datasets</li>
+                       <li><strong>Parallelizable:</strong> Can be easily parallelized</li>
+                   </ul>
+               </div>
+
+               <div class="warning">
+                   <h4>Disadvantage:</h4>
+                   <p>Requires O(n) extra space for temporary arrays during merging process.</p>
+               </div>
+
+               <a href="https://yongdanielliang.github.io/animation/web/MergeSortNew.html" class="animation-link" target="_blank">View Merge Sort Animation</a>
+           </section>
+
+           <!-- Generic Sorting Section -->
+           <section id="generic-sorting" class="content-section">
+               <h1>Generic Sorting</h1>
+               
+               <h2>Making Sorting Methods Generic</h2>
+               <p>Generic methods allow us to sort arrays of any comparable type, not just primitive types like int or double.</p>
+               
+               <div class="key-points">
+                   <h4>Benefits of Generic Sorting:</h4>
+                   <ul>
+                       <li>Code reusability for different data types</li>
+                       <li>Type safety at compile time</li>
+                       <li>Can sort custom objects that implement Comparable</li>
+                       <li>Eliminates need for separate methods for each type</li>
+                   </ul>
+               </div>
+
+               <h2>Generic Selection Sort</h2>
+               <div class="code-header">Generic Selection Sort Implementation</div>
+               <div class="code-block with-header">
+                   <pre>
+public static &lt;E extends Comparable&lt;E&gt;&gt; void selectionSort(E[] list) {
+   for (int i = 0; i < list.length - 1; i++) {
+       // Find the minimum in the list[i..list.length-1]
+       E currentMin = list[i];
+       int currentMinIndex = i;
+       
+       for (int j = i + 1; j < list.length; j++) {
+           if (currentMin.compareTo(list[j]) > 0) {
+               currentMin = list[j];
+               currentMinIndex = j;
+           }
+       }
+       
+       // Swap list[i] with list[currentMinIndex] if necessary
+       if (currentMinIndex != i) {
+           list[currentMinIndex] = list[i];
+           list[i] = currentMin;
+       }
+   }
+}
+                   </pre>
+               </div>
+
+               <h2>Understanding Generic Syntax</h2>
+               <div class="code-block">
+                   <pre>
+&lt;E extends Comparable&lt;E&gt;&gt;
+│        │              │
+│        │              └─ E must be comparable to itself
+│        └─ E must implement Comparable interface  
+└─ Generic type parameter E
+                   </pre>
+               </div>
+
+               <h2>Example Usage</h2>
+               <div class="code-header">Using Generic Sort</div>
+               <div class="code-block with-header">
+                   <pre>
+// Sorting String array
+String[] names = {"John", "Alice", "Bob", "Charlie"};
+selectionSort(names);
+// Result: ["Alice", "Bob", "Charlie", "John"]
+
+// Sorting Integer array  
+Integer[] numbers = {64, 25, 12, 22, 11};
+selectionSort(numbers);
+// Result: [11, 12, 22, 25, 64]
+
+// Sorting custom objects (must implement Comparable)
+Person[] people = {new Person("John", 25), new Person("Alice", 30)};
+selectionSort(people);  // Sorts based on Person's compareTo method
+                   </pre>
+               </div>
+
+               <h2>Custom Class Example</h2>
+               <div class="code-header">Person Class with Comparable</div>
+               <div class="code-block with-header">
+                   <pre>
+public class Person implements Comparable&lt;Person&gt; {
+   private String name;
+   private int age;
+   
+   public Person(String name, int age) {
+       this.name = name;
+       this.age = age;
+   }
+   
+   @Override
+   public int compareTo(Person other) {
+       // Sort by age
+       return Integer.compare(this.age, other.age);
+       
+       // Alternative: Sort by name
+       // return this.name.compareTo(other.name);
+   }
+   
+   @Override
+   public String toString() {
+       return name + "(" + age + ")";
+   }
+}
+                   </pre>
+               </div>
+
+               <h2>Generic Merge Sort</h2>
+               <div class="code-header">Generic Merge Sort</div>
+               <div class="code-block with-header">
+                   <pre>
+public static &lt;E extends Comparable&lt;E&gt;&gt; void mergeSort(E[] list) {
+   if (list.length > 1) {
+       // Create first half array
+       E[] firstHalf = (E[]) new Comparable[list.length / 2];
+       System.arraycopy(list, 0, firstHalf, 0, list.length / 2);
+       mergeSort(firstHalf);
+       
+       // Create second half array
+       int secondHalfLength = list.length - list.length / 2;
+       E[] secondHalf = (E[]) new Comparable[secondHalfLength];
+       System.arraycopy(list, list.length / 2, secondHalf, 0, secondHalfLength);
+       mergeSort(secondHalf);
+       
+       // Merge the two halves
+       merge(firstHalf, secondHalf, list);
+   }
+}
+
+public static &lt;E extends Comparable&lt;E&gt;&gt; void merge(E[] list1, E[] list2, E[] temp) {
+   int current1 = 0, current2 = 0, current3 = 0;
+   
+   while (current1 < list1.length && current2 < list2.length) {
+       if (list1[current1].compareTo(list2[current2]) < 0)
+           temp[current3++] = list1[current1++];
+       else
+           temp[current3++] = list2[current2++];
+   }
+   
+   while (current1 < list1.length)
+       temp[current3++] = list1[current1++];
+       
+   while (current2 < list2.length)
+       temp[current3++] = list2[current2++];
+}
+                   </pre>
+               </div>
+           </section>
+
+           <!-- Complexity Analysis Section -->
+           <section id="complexity-analysis" class="content-section">
+               <h1>Complexity Analysis</h1>
+               
+               <h2>Time Complexity Summary</h2>
+               <table class="complexity-table">
+                   <thead>
+                       <tr>
+                           <th>Algorithm</th>
+                           <th>Best Case</th>
+                           <th>Average Case</th>
+                           <th>Worst Case</th>
+                           <th>Notes</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <tr>
+                           <td><strong>Linear Search</strong></td>
+                           <td>O(1)</td>
+                           <td>O(n)</td>
+                           <td>O(n)</td>
+                           <td>Simple, works on unsorted data</td>
+                       </tr>
+                       <tr>
+                           <td><strong>Binary Search</strong></td>
+                           <td>O(1)</td>
+                           <td>O(log n)</td>
+                           <td>O(log n)</td>
+                           <td>Requires sorted data</td>
+                       </tr>
+                       <tr>
+                           <td><strong>Selection Sort</strong></td>
+                           <td>O(n²)</td>
+                           <td>O(n²)</td>
+                           <td>O(n²)</td>
+                           <td>Simple but inefficient</td>
+                       </tr>
+                       <tr>
+                           <td><strong>Insertion Sort</strong></td>
+                           <td>O(n)</td>
+                           <td>O(n²)</td>
+                           <td>O(n²)</td>
+                           <td>Good for small/nearly sorted arrays</td>
+                       </tr>
+                       <tr>
+                           <td><strong>Bubble Sort</strong></td>
+                           <td>O(n)</td>
+                           <td>O(n²)</td>
+                           <td>O(n²)</td>
+                           <td>Educational purposes mostly</td>
+                       </tr>
+                       <tr>
+                           <td><strong>Merge Sort</strong></td>
+                           <td>O(n log n)</td>
+                           <td>O(n log n)</td>
+                           <td>O(n log n)</td>
+                           <td>Consistent performance, stable</td>
+                       </tr>
+                   </tbody>
+               </table>
+
+               <h2>Space Complexity Analysis</h2>
+               <table class="complexity-table">
+                   <thead>
+                       <tr>
+                           <th>Algorithm</th>
+                           <th>Space Complexity</th>
+                           <th>Description</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <tr>
+                           <td>Linear Search</td>
+                           <td>O(1)</td>
+                           <td>Only uses a few variables</td>
+                       </tr>
+                       <tr>
+                           <td>Binary Search</td>
+                           <td>O(1)</td>
+                           <td>Iterative version uses constant space</td>
+                       </tr>
+                       <tr>
+                           <td>Selection Sort</td>
+                           <td>O(1)</td>
+                           <td>In-place sorting algorithm</td>
+                       </tr>
+                       <tr>
+                           <td>Insertion Sort</td>
+                           <td>O(1)</td>
+                           <td>In-place sorting algorithm</td>
+                       </tr>
+                       <tr>
+                           <td>Bubble Sort</td>
+                           <td>O(1)</td>
+                           <td>In-place sorting algorithm</td>
+                       </tr>
+                       <tr>
+                           <td>Merge Sort</td>
+                           <td>O(n)</td>
+                           <td>Requires additional arrays for merging</td>
+                       </tr>
+                   </tbody>
+               </table>
+
+               <h2>Algorithm Selection Guidelines</h2>
+               
+               <div class="key-points">
+                   <h4>When to Use Each Algorithm:</h4>
+                   
+                   <h3>Linear Search:</h3>
+                   <ul>
+                       <li>Small datasets</li>
+                       <li>Unsorted data</li>
+                       <li>When simplicity is preferred</li>
+                   </ul>
+                   
+                   <h3>Binary Search:</h3>
+                   <ul>
+                       <li>Large sorted datasets</li>
+                       <li>When search operations are frequent</li>
+                       <li>Memory is not a constraint</li>
+                   </ul>
+                   
+                   <h3>Selection Sort:</h3>
+                   <ul>
+                       <li>Very small datasets (n < 20)</li>
+                       <li>When memory writes are expensive</li>
+                       <li>Educational purposes</li>
+                   </ul>
+                   
+                   <h3>Insertion Sort:</h3>
+                   <ul>
+                       <li>Small datasets (n < 50)</li>
+                       <li>Nearly sorted data</li>
+                       <li>As part of hybrid algorithms</li>
+                   </ul>
+                   
+                   <h3>Bubble Sort:</h3>
+                   <ul>
+                       <li>Educational purposes only</li>
+                       <li>Very small datasets</li>
+                       <li>When code simplicity is critical</li>
+                   </ul>
+                   
+                   <h3>Merge Sort:</h3>
+                   <ul>
+                       <li>Large datasets</li>
+                       <li>When stability is required</li>
+                       <li>When consistent O(n log n) performance is needed</li>
+                       <li>External sorting (sorting data that doesn't fit in memory)</li>
+                   </ul>
+               </div>
+
+               <h2>Performance Comparison Chart</h2>
+               <div class="code-block">
+                   <pre>
+Array Size:     100      1,000    10,000   100,000
+─────────────────────────────────────────────────────
+Linear Search:   50       500     5,000    50,000   comparisons
+Binary Search:    7        10        14        17   comparisons
+
+Selection:    4,950    499,500  49,995K  4,999.5M  comparisons  
+Insertion:    2,500*   250K*    25M*     2.5B*    comparisons
+Bubble:       4,950    499,500  49,995K  4,999.5M  comparisons
+Merge:          664      9,966   132,877  1,660,964 comparisons
+
+* Best case for insertion sort (already sorted): n-1 comparisons
+                   </pre>
+               </div>
+
+               <div class="warning">
+                   <h4>Important Notes:</h4>
+                   <ul>
+                       <li>Time complexity represents growth rate, not absolute time</li>
+                       <li>Constants and lower-order terms matter for small datasets</li>
+                       <li>Real-world performance depends on implementation and hardware</li>
+                       <li>Cache behavior can significantly affect performance</li>
+                   </ul>
+               </div>
+           </section>
+       </main>
+   </div>
+
+   <script>
+       // JavaScript for navigation
+       document.addEventListener('DOMContentLoaded', function() {
+           const navItems = document.querySelectorAll('.nav-item');
+           const contentSections = document.querySelectorAll('.content-section');
+           
+           navItems.forEach(item => {
+               item.addEventListener('click', function(e) {
+                   e.preventDefault();
+                   
+                   // Remove active class from all nav items and content sections
+                   navItems.forEach(nav => nav.classList.remove('active'));
+                   contentSections.forEach(section => section.classList.remove('active'));
+                   
+                   // Add active class to clicked nav item
+                   this.classList.add('active');
+                   
+                   // Show corresponding content section
+                   const targetId = this.getAttribute('href').substring(1);
+                   const targetSection = document.getElementById(targetId);
+                   if (targetSection) {
+                       targetSection.classList.add('active');
+                   }
+               });
+           });
+           
+           // Smooth scrolling for same-page navigation
+           document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+               anchor.addEventListener('click', function (e) {
+                   const targetId = this.getAttribute('href');
+                   const targetElement = document.querySelector(targetId);
+                   
+                   if (targetElement && targetElement.classList.contains('content-section')) {
+                       e.preventDefault();
+                       targetElement.scrollIntoView({
+                           behavior: 'smooth',
+                           block: 'start'
+                       });
+                   }
+               });
+           });
+       });
+   </script>
+</body>
+</html>
