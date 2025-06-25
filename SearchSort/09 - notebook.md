@@ -232,8 +232,9 @@ public static void merge(int[] list1, int[] list2, int[] temp) {
         temp[current3++] = list2[current2++];
 }
 ```
-**Time Complexity**: O(n log n) 
-**Space Complexity**: O(n) - Requires extra arrays
+
+**Time Complexity**: O(n log n) *Work best than other sort methods
+**Space Complexity**: O(n) *Use more space than other sort methods
 
 ## Generic Sorting
 

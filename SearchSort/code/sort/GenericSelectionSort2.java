@@ -1,3 +1,4 @@
+package sort;
 
  public class GenericSelectionSort2 {
     public static <T extends Comparable<T>> void selectionSort(T[] list)

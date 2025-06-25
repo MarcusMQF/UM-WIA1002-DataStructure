@@ -1,3 +1,5 @@
+package sort;
+
 public class InsertionSort {
   /** The method for sorting the numbers */
   public static void insertionSort(int[] list) {

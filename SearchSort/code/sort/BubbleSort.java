@@ -1,3 +1,7 @@
+package sort;
+
+// Has better case performance: Time complexity O(n) in case array sorted earlier or already sorted
+
 public class BubbleSort {
   /** Bubble sort method */
   public static void bubbleSort(int[] list) {
@@ -19,7 +23,6 @@ public class BubbleSort {
     }
   }
 
-  /** A test method */
   public static void main(String[] args) {
     int[] list = {2, 3, 2, 5, 6, 1, -2, 3, 14, 12};
     bubbleSort(list);

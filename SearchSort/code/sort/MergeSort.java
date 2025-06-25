@@ -1,3 +1,5 @@
+package sort;
+
 public class MergeSort {
   /** The method for sorting the numbers */
   public static void mergeSort(int[] list) {
