@@ -84,9 +84,9 @@ class TestIntMyStack {
         System.out.println("\nStack is now empty: " + intStack.isEmpty());
         
         // Analysis of the output
-        System.out.println("\n" + "=".repeat(60));
+        System.out.println("\n============================================================");
         System.out.println("ANALYSIS OF OUTPUT:");
-        System.out.println("=".repeat(60));
+        System.out.println("============================================================");
         System.out.println("Question: What is the output of the elements? What is the order, why?");
         System.out.println();
         System.out.println("Answer:");

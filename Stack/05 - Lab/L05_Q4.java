@@ -91,12 +91,12 @@ public class L05_Q4 {
             
             // If characters don't match, it's not a palindrome
             if (originalChar != poppedChar) {
-                System.out.println("  ❌ Mismatch found! Not a palindrome.");
+                System.out.println("Mismatch found! Not a palindrome.");
                 return false;
             }
         }
         
-        System.out.println("  ✅ All characters match! It's a palindrome.");
+        System.out.println("All characters match! It's a palindrome.");
         System.out.println("  Original:  " + cleanInput);
         System.out.println("  Reversed:  " + reversedString.toString());
         
@@ -135,9 +135,9 @@ public class L05_Q4 {
      * Test method with various palindrome examples
      */
     public static void runTests() {
-        System.out.println("=".repeat(80));
+        System.out.println("========================================");
         System.out.println("Q4: PALINDROME CHECKER USING STACK - COMPREHENSIVE TESTING");
-        System.out.println("=".repeat(80));
+        System.out.println("========================================");
         
         // Test cases (max 15 characters each)
         String[] testCases = {
@@ -166,8 +166,8 @@ public class L05_Q4 {
             System.out.println("Length: " + testString.length() + " characters");
             
             boolean result = isPalindrome(testString);
-            System.out.println("Result: " + (result ? "✅ PALINDROME" : "❌ NOT PALINDROME"));
-            System.out.println("-".repeat(60));
+            System.out.println("Result: " + (result ? "PALINDROME" : "NOT PALINDROME"));
+            System.out.println("------------------------------------------------------------");
         }
     }
     
@@ -177,9 +177,9 @@ public class L05_Q4 {
     public static void interactiveMode() {
         Scanner scanner = new Scanner(System.in);
         
-        System.out.println("\n" + "=".repeat(60));
+        System.out.println("\n============================================================");
         System.out.println("INTERACTIVE PALINDROME CHECKER");
-        System.out.println("=".repeat(60));
+        System.out.println("============================================================");
         System.out.println("Enter strings to check (max 15 characters)");
         System.out.println("Type 'quit' to exit");
         
@@ -197,14 +197,14 @@ public class L05_Q4 {
             }
             
             if (input.length() > 15) {
-                System.out.println("❌ Error: String length exceeds 15 characters!");
+                System.out.println("Error: String length exceeds 15 characters!");
                 System.out.println("Your string: \"" + input + "\" (" + input.length() + " characters)");
                 continue;
             }
             
             System.out.println("\nAnalyzing: \"" + input + "\"");
             boolean result = isPalindrome(input);
-            System.out.println("\nFinal Result: " + (result ? "✅ PALINDROME" : "❌ NOT PALINDROME"));
+            System.out.println("\nFinal Result: " + (result ? "PALINDROME" : "NOT PALINDROME"));
         }
         
         scanner.close();
@@ -235,9 +235,9 @@ public class L05_Q4 {
         interactiveMode();
         
         // Summary
-        System.out.println("\n" + "=".repeat(80));
+        System.out.println("\n================================================================================");
         System.out.println("ALGORITHM ANALYSIS:");
-        System.out.println("=".repeat(80));
+        System.out.println("================================================================================");
         System.out.println("Time Complexity: O(n) where n is string length");
         System.out.println("Space Complexity: O(n) for the stack storage");
         System.out.println("Maximum Input: 15 characters as specified");

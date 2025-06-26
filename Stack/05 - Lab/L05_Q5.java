@@ -75,7 +75,7 @@ public class L05_Q5 {
             rodA.push(i);
         }
         
-        System.out.println("🏗️ Tower of Hanoi initialized with " + n + " disks:");
+        System.out.println("Tower of Hanoi initialized with " + n + " disks:");
         displayTower();
     }
     
@@ -83,13 +83,13 @@ public class L05_Q5 {
      * Display the current state of all three rods
      */
     public static void displayTower() {
-        System.out.println("┌─────────────────────────────────────────────────────────┐");
-        System.out.println("│                    TOWER OF HANOI                      │");
-        System.out.println("├─────────────────────────────────────────────────────────┤");
-        System.out.printf("│ Rod A (Source):      %-30s │%n", rodA.toString());
-        System.out.printf("│ Rod B (Auxiliary):   %-30s │%n", rodB.toString());
-        System.out.printf("│ Rod C (Destination): %-30s │%n", rodC.toString());
-        System.out.println("└─────────────────────────────────────────────────────────┘");
+        System.out.println("=============================================================");
+        System.out.println("                    TOWER OF HANOI                      ");
+        System.out.println("=============================================================");
+        System.out.printf("Rod A (Source):      %s%n", rodA.toString());
+        System.out.printf("Rod B (Auxiliary):   %s%n", rodB.toString());
+        System.out.printf("Rod C (Destination): %s%n", rodC.toString());
+        System.out.println("=============================================================");
         
         // Visual representation
         System.out.println("\nVisual Representation:");
@@ -145,7 +145,7 @@ public class L05_Q5 {
         for (int i = 0; i < maxHeight; i++) {
             System.out.printf("   %s      %s      %s%n", visual[i][0], visual[i][1], visual[i][2]);
         }
-        System.out.println("  ═══    ═══    ═══");
+        System.out.println("  ===    ===    ===");
         System.out.println("   A      B      C");
     }
     
@@ -262,7 +262,7 @@ public class L05_Q5 {
         Scanner scanner = new Scanner(System.in);
         initializeTower(n);
         
-        System.out.println("\n🎮 INTERACTIVE MODE - Solve the puzzle manually!");
+        System.out.println("\nINTERACTIVE MODE - Solve the puzzle manually!");
         System.out.println("Commands: AB (A to B), AC (A to C), BA (B to A), BC (B to C), CA (C to A), CB (C to B)");
         System.out.println("Type 'auto' for automatic solution, 'quit' to exit");
         
@@ -273,7 +273,7 @@ public class L05_Q5 {
             if (move.equals("QUIT")) {
                 break;
             } else if (move.equals("AUTO")) {
-                System.out.println("🤖 Switching to automatic solution...");
+                System.out.println("Switching to automatic solution...");
                 solveHanoi(rodA.getSize(), rodA, rodC, rodB, "A", "C", "B");
                 break;
             }
@@ -299,16 +299,16 @@ public class L05_Q5 {
                         moveDisk(rodC, rodB, "C", "B");
                         break;
                     default:
-                        System.out.println("❌ Invalid move! Use format like 'AB' to move from A to B");
+                        System.out.println("Invalid move! Use format like 'AB' to move from A to B");
                         continue;
                 }
             } catch (Exception e) {
-                System.out.println("❌ Invalid move: " + e.getMessage());
+                System.out.println("Invalid move: " + e.getMessage());
             }
         }
         
         if (isSolved(n)) {
-            System.out.println("🎉 CONGRATULATIONS! You solved the Tower of Hanoi puzzle!");
+            System.out.println("CONGRATULATIONS! You solved the Tower of Hanoi puzzle!");
             System.out.println("Total moves: " + moveCounter);
             System.out.println("Minimum possible moves: " + (int)(Math.pow(2, n) - 1));
         }
@@ -321,17 +321,17 @@ public class L05_Q5 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
-        System.out.println("🗼 TOWER OF HANOI SOLVER USING STACKS");
-        System.out.println("═".repeat(50));
+        System.out.println("TOWER OF HANOI SOLVER USING STACKS");
+        System.out.println("==================================================");
         
         // Algorithm explanation
-        System.out.println("📋 RULES:");
+        System.out.println("RULES:");
         System.out.println("1. Only one disk may be moved at a time");
         System.out.println("2. Each move consists of taking the upper disk from one rod");
         System.out.println("3. No disk may be placed on top of a smaller disk");
         System.out.println();
         
-        System.out.println("🧠 ALGORITHM:");
+        System.out.println("ALGORITHM:");
         System.out.println("To move n disks from A to C using B:");
         System.out.println("1. Move n-1 disks from A to B (using C as auxiliary)");
         System.out.println("2. Move the largest disk from A to C");
@@ -358,8 +358,8 @@ public class L05_Q5 {
         
         if (choice == 1) {
             // Automatic solution
-            System.out.println("\n🤖 AUTOMATIC SOLUTION");
-            System.out.println("═".repeat(30));
+            System.out.println("\nAUTOMATIC SOLUTION");
+            System.out.println("==============================");
             
             initializeTower(n);
             System.out.println("Solving Tower of Hanoi with " + n + " disks...");
@@ -370,10 +370,10 @@ public class L05_Q5 {
             solveHanoi(n, rodA, rodC, rodB, "A", "C", "B");
             long endTime = System.currentTimeMillis();
             
-            System.out.println("🎉 PUZZLE SOLVED!");
+            System.out.println("PUZZLE SOLVED!");
             System.out.println("Total moves: " + moveCounter);
             System.out.println("Time taken: " + (endTime - startTime) + " ms");
-            System.out.println("Verification: " + (isSolved(n) ? "✅ CORRECT" : "❌ ERROR"));
+            System.out.println("Verification: " + (isSolved(n) ? "CORRECT" : "ERROR"));
             
         } else if (choice == 2) {
             // Interactive mode
@@ -383,9 +383,9 @@ public class L05_Q5 {
         }
         
         // Algorithm analysis
-        System.out.println("\n" + "═".repeat(60));
+        System.out.println("\n============================================================");
         System.out.println("ALGORITHM ANALYSIS");
-        System.out.println("═".repeat(60));
+        System.out.println("============================================================");
         System.out.println("Time Complexity: O(2^n) - exponential");
         System.out.println("Space Complexity: O(n) - recursion depth");
         System.out.println("Minimum Moves: 2^n - 1");

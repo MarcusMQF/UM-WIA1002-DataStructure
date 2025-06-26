@@ -133,9 +133,9 @@ public class L05_Q3 {
      * Test program to demonstrate the algorithms
      */
     public static void main(String[] args) {
-        System.out.println("=".repeat(70));
+        System.out.println("======================================================================");
         System.out.println("Q3: FINDING SUM OF ELEMENTS IN STACK USING ONLY STACK ADT OPERATIONS");
-        System.out.println("=".repeat(70));
+        System.out.println("======================================================================");
         
         // Create and populate test stack
         MyStack<Integer> testStack = new MyStack<>();
@@ -151,18 +151,18 @@ public class L05_Q3 {
         System.out.println("Expected sum: " + (5 + 10 + 15 + 20 + 25) + " = 75");
         
         // Test Approach 1: Non-destructive
-        System.out.println("\n" + "=".repeat(50));
+        System.out.println("\n==================================================");
         System.out.println("APPROACH 1: NON-DESTRUCTIVE METHOD");
-        System.out.println("=".repeat(50));
+        System.out.println("==================================================");
         int sum1 = findSumPreserveStack(testStack);
         System.out.println("Sum calculated: " + sum1);
         System.out.println("Stack after calculation: " + testStack.toString());
         System.out.println("Stack preserved: " + (!testStack.isEmpty()));
         
         // Test Approach 2: Destructive (using a copy)
-        System.out.println("\n" + "=".repeat(50));
+        System.out.println("\n==================================================");
         System.out.println("APPROACH 2: DESTRUCTIVE METHOD (using copy)");
-        System.out.println("=".repeat(50));
+        System.out.println("==================================================");
         MyStack<Integer> copyStack = createCopy(testStack);
         int sum2 = findSumDestructive(copyStack);
         System.out.println("Sum calculated: " + sum2);
@@ -170,9 +170,9 @@ public class L05_Q3 {
         System.out.println("Copy stack empty: " + copyStack.isEmpty());
         
         // Test Approach 3: Recursive (using another copy)
-        System.out.println("\n" + "=".repeat(50));
+        System.out.println("\n==================================================");
         System.out.println("APPROACH 3: RECURSIVE METHOD");
-        System.out.println("=".repeat(50));
+        System.out.println("==================================================");
         MyStack<Integer> recursiveStack = createCopy(testStack);
         System.out.println("Stack before recursive calculation: " + recursiveStack.toString());
         int sum3 = findSumRecursive(recursiveStack);
@@ -181,9 +181,9 @@ public class L05_Q3 {
         System.out.println("Stack preserved: " + (!recursiveStack.isEmpty()));
         
         // Algorithm Analysis
-        System.out.println("\n" + "=".repeat(70));
+        System.out.println("\n======================================================================");
         System.out.println("ALGORITHM ANALYSIS");
-        System.out.println("=".repeat(70));
+        System.out.println("======================================================================");
         System.out.println("PROBLEM: Find sum using ONLY stack ADT operations:");
         System.out.println("  - push(E o)");
         System.out.println("  - pop()");
