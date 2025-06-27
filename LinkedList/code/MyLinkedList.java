@@ -211,6 +211,7 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
     return new LinkedListIterator();
   }
 
+  @SuppressWarnings("unused")
   private void checkIndex(int index) {
     if (index < 0 || index >= size)
       throw new IndexOutOfBoundsException
