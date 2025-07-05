@@ -1,4 +1,4 @@
-# Stack Data Structure - Complete Guide
+# Stack Data Structure
 
 ## 📚 Overview
 A **stack** is a fundamental data structure that follows the **Last-In, First-Out (LIFO)** principle. Think of it like a stack of plates - you can only add or remove plates from the top!
