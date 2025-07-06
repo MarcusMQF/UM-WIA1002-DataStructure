@@ -142,13 +142,13 @@ A **Bag** is a finite collection of objects with these characteristics:
 +---------------------------------------+
 | +getCurrentSize(): int                |
 | +isEmpty(): boolean                   |
-| +add(newEntry: T): boolean           |
-| +remove(): T                         |
-| +remove(anEntry: T): boolean         |
-| +clear(): void                       |
-| +getFrequencyOf(anEntry: T): int     |
-| +contains(anEntry: T): boolean       |
-| +toArray(): T[]                      |
+| +add(newEntry: T): boolean            |
+| +remove(): T                          |
+| +remove(anEntry: T): boolean          |
+| +clear(): void                        |
+| +getFrequencyOf(anEntry: T): int      |
+| +contains(anEntry: T): boolean        |
+| +toArray(): T[]                       |
 +---------------------------------------+
 ```
 

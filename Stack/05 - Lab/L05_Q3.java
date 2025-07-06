@@ -1,8 +1,5 @@
 import java.util.ArrayList;
 
-/**
- * MyStack class - Stack ADT implementation
- */
 class MyStack<E> {
     private ArrayList<E> list;
     

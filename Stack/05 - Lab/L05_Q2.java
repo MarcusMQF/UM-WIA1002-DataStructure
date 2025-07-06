@@ -1,9 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * MyStack class from Q1(a) - needed for TestIntMyStack
- */
 class MyStack<E> {
     private ArrayList<E> list;
     

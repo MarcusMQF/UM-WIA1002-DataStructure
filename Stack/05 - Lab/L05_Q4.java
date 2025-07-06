@@ -1,9 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * MyStack class - Stack ADT implementation for palindrome checking
- */
 class MyStack<E> {
     private ArrayList<E> list;
     

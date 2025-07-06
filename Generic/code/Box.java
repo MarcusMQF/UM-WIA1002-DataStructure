@@ -1,4 +1,5 @@
 public class Box {
+	@SuppressWarnings("rawtypes")
 	private Comparable item;
 	boolean full;
 	
@@ -6,12 +7,13 @@ public class Box {
 		full=false;
 	}
 	
-	public void store(Comparable a){
+	public void store(@SuppressWarnings("rawtypes") Comparable a){
 		this.item = a;
 		full=true;
 	}
    
-   public Comparable retrieve()   {
+   @SuppressWarnings("rawtypes")
+public Comparable retrieve()   {
       return item;
    }
 	

@@ -1,9 +1,5 @@
 import java.util.ArrayList;
 
-/**
- * Q1(a) - Generic MyStack class implementation using ArrayList
- * @param <E> the type of elements in this stack
- */
 class MyStack<E> {
     private ArrayList<E> list;
     

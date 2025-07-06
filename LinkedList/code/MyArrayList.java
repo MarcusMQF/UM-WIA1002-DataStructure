@@ -1,5 +1,6 @@
 public class MyArrayList<E> extends MyAbstractList<E> {
   public static final int INITIAL_CAPACITY = 16;
+  @SuppressWarnings("unchecked")
   private E[] data = (E[])new Object[INITIAL_CAPACITY];
 
   /** Create a default list */
@@ -28,6 +29,7 @@ public class MyArrayList<E> extends MyAbstractList<E> {
   }
 
   /** Create a new larger array, double the current size + 1 */
+  @SuppressWarnings("unchecked")
   private void ensureCapacity() {
     if (size >= data.length) {
       E[] newData = (E[])(new Object[size * 2 + 1]);
@@ -36,6 +38,7 @@ public class MyArrayList<E> extends MyAbstractList<E> {
     }
   }
 
+  @SuppressWarnings("unchecked")
   @Override /** Clear the list */
   public void clear() {
     data = (E[])new Object[INITIAL_CAPACITY];
@@ -125,6 +128,7 @@ public class MyArrayList<E> extends MyAbstractList<E> {
   /** Trims the capacity to current size */
   public void trimToSize() {
     if (size != data.length) { 
+      @SuppressWarnings("unchecked")
       E[] newData = (E[])(new Object[size]);
       System.arraycopy(data, 0, newData, 0, size);
       data = newData;

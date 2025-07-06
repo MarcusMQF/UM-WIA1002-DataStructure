@@ -11,7 +11,7 @@ public class WildCardDemo1
       System.out.println();
    }
 
-   public static void display(ArrayList<Number> list)   {
+   public static void display(ArrayList<? extends Number> list)   {
       for (int i=0; i<=2; i++)
          if ( list.get(i).equals(6.0) )
             System.out.println("yes");

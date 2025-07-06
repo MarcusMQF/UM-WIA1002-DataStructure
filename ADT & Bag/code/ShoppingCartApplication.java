@@ -1,10 +1,3 @@
-/**
- * A shopping cart application that demonstrates the use of Bag ADT
- * for managing items in an online shopping scenario.
- * 
- * @author Data Structure Course
- * @version 1.0
- */
 public class ShoppingCartApplication {
     
     /**
@@ -25,7 +18,6 @@ public class ShoppingCartApplication {
         public double getPrice() { return price; }
         public String getCategory() { return category; }
         
-        @Override
         public boolean equals(Object other) {
             if (this == other) return true;
             if (other == null || getClass() != other.getClass()) return false;

@@ -10,7 +10,8 @@ public class UseBox	{
 		System.out.println("Box 1 has " + box1.toString() );
 		System.out.println("Bos 2 has " + box2.toString() );
       
-      int c = box1.retrieve().compareTo(box2.retrieve());  
+      @SuppressWarnings({ "unchecked", "unused" })
+	  int c = box1.retrieve().compareTo(box2.retrieve());  
 	}
 }
 
