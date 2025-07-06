@@ -106,6 +106,34 @@ public class GraphList {
         return adjList.get(vertex);
     }
 }
+
+public class GraphExample {
+    public static void main(String[] args) {
+        // Create a graph with 4 vertices (0, 1, 2, 3)
+        GraphList graph = new GraphList(4);
+        
+        // Add some edges
+        graph.addEdge(0, 1);  // Connect 0 and 1
+        graph.addEdge(1, 2);  // Connect 1 and 2
+        graph.addEdge(2, 3);  // Connect 2 and 3
+        graph.addEdge(0, 3);  // Connect 0 and 3
+        
+        // Now our graph looks like:
+        // 0 -- 1
+        // |    |
+        // 3 -- 2
+        
+        // Print the adjacency list representation
+        System.out.println("Graph representation:");
+        for (int i = 0; i < 4; i++) {
+            System.out.println("Vertex " + i + ": " + graph.getNeighbors(i));
+        }
+        
+        // Check some edges
+        System.out.println("Edge 0-1 exists: " + graph.hasEdge(0, 1)); // true
+        System.out.println("Edge 0-2 exists: " + graph.hasEdge(0, 2)); // false
+    }
+}
 ```
 
 ## 3. Advanced Graph Implementation
