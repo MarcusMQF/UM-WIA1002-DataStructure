@@ -233,16 +233,19 @@ public class FlightTest {
         
         // Measure DFS time
         long startTime = System.nanoTime();
+        @SuppressWarnings("unused")
         List<String> dfsResult = system.findAnyRoute(from, to);
         long dfsTime = System.nanoTime() - startTime;
         
         // Measure BFS time
         startTime = System.nanoTime();
+        @SuppressWarnings("unused")
         List<String> bfsResult = system.findShortestRoute(from, to);
         long bfsTime = System.nanoTime() - startTime;
         
         // Measure Dijkstra time
         startTime = System.nanoTime();
+        @SuppressWarnings("unused")
         FlightRoutingSystem.RouteInfo dijkstraResult = system.findCheapestRoute(from, to);
         long dijkstraTime = System.nanoTime() - startTime;
         
